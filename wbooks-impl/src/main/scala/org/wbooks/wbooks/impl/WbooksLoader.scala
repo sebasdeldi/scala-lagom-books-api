@@ -3,7 +3,8 @@ package org.wbooks.wbooks.impl
 import akka.cluster.sharding.typed.scaladsl.Entity
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
-import com.lightbend.lagom.scaladsl.persistence.cassandra.CassandraPersistenceComponents
+import com.lightbend.lagom.scaladsl.persistence.jdbc.JdbcPersistenceComponents
+import com.lightbend.lagom.scaladsl.persistence.slick.SlickPersistenceComponents
 import com.lightbend.lagom.scaladsl.server._
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import play.api.libs.ws.ahc.AhcWSComponents
@@ -11,6 +12,7 @@ import org.wbooks.wbooks.api.WbooksService
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
 import com.lightbend.lagom.scaladsl.playjson.JsonSerializerRegistry
 import com.softwaremill.macwire._
+import play.api.db.HikariCPComponents
 
 class WbooksLoader extends LagomApplicationLoader {
 
@@ -27,7 +29,9 @@ class WbooksLoader extends LagomApplicationLoader {
 
 abstract class WbooksApplication(context: LagomApplicationContext)
   extends LagomApplication(context)
-    with CassandraPersistenceComponents
+    with JdbcPersistenceComponents
+    with HikariCPComponents
+    with SlickPersistenceComponents
     with LagomKafkaComponents
     with AhcWSComponents {
 

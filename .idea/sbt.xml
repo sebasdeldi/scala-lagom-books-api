@@ -14,8 +14,6 @@
             <option value="$PROJECT_DIR$/target/lagom-dynamic-projects/lagom-internal-meta-project-service-locator" />
             <option value="$PROJECT_DIR$/wbooks-api" />
             <option value="$PROJECT_DIR$/wbooks-impl" />
-            <option value="$PROJECT_DIR$/wbooks-stream-api" />
-            <option value="$PROJECT_DIR$/wbooks-stream-impl" />
           </set>
         </option>
         <option name="resolveSbtClassifiers" value="true" />

@@ -1,0 +1,21 @@
+
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+t
+Dwbooks-impl/src/main/scala/org/wbooks/wbooks/impl/WbooksLoader.scala,1/4/140e12c3b2643b3134ebf22e73d307292f493d9d
+†
+Vwbooks-stream-api/src/main/scala/org/wbooks/wbooksstream/api/WbooksStreamService.scala,8/8/882be8dd5b465563b1be391191c460f8f8d9b4cf
+Œ
+\wbooks-stream-impl/src/main/scala/org/wbooks/wbooksstream/impl/WbooksStreamServiceImpl.scala,3/7/3758ed3db81605eb6b218a6b4927f016d5a73b41
+‡
+Wwbooks-stream-impl/src/main/scala/org/wbooks/wbooksstream/impl/WbooksStreamLoader.scala,9/8/981352420d0aa831eb7b5709c688ce7c7b008ec5
+s
+Cwbooks-api/src/main/scala/org/wbooks/wbooks/api/WbooksService.scala,b/1/b1261d814a3b391be8e43ef962870fa9942e846e
+C
+project/plugins.sbt,9/4/94cef6f41fc73ccebe945d2b889292615a09dddb
+9
+	build.sbt,7/4/74b95601c3a6d9d565cd312fac64094ec0f9d847
+y
+Iwbooks-impl/src/main/scala/org/wbooks/wbooks/impl/WbooksServiceImpl.scala,b/f/bf885f303f17366d9088412cd405cc69f68520b9
+w
+Gwbooks-impl/src/main/scala/org/wbooks/wbooks/impl/WbooksAggregate.scala,e/d/ed539946e10b421888c46df576ed90c077e8ded1
