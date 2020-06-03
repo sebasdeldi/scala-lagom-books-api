@@ -1,18 +1,19 @@
-package org.wbooks.wbooks.impl
+package org.wbooks.wbooks.impl.service
 
-import akka.cluster.sharding.typed.scaladsl.Entity
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
+import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
+import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import com.lightbend.lagom.scaladsl.persistence.jdbc.JdbcPersistenceComponents
 import com.lightbend.lagom.scaladsl.persistence.slick.SlickPersistenceComponents
 import com.lightbend.lagom.scaladsl.server._
-import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
-import play.api.libs.ws.ahc.AhcWSComponents
-import org.wbooks.wbooks.api.WbooksService
-import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
-import com.lightbend.lagom.scaladsl.playjson.JsonSerializerRegistry
 import com.softwaremill.macwire._
+import org.wbooks.wbooks.api.WbooksService
+import org.wbooks.wbooks.impl.eventsourcing.BookEntity
 import play.api.db.HikariCPComponents
+import play.api.libs.ws.ahc.AhcWSComponents
+
+
 
 class WbooksLoader extends LagomApplicationLoader {
 
@@ -36,17 +37,11 @@ abstract class WbooksApplication(context: LagomApplicationContext)
     with AhcWSComponents {
 
   // Bind the service that this server provides
-  override lazy val lagomServer: LagomServer = serverFor[WbooksService](wire[WbooksServiceImpl])
+  override lazy val lagomServer = serverFor[WbooksService](wire[WbooksServiceImpl])
 
-  // Register the JSON serializer registry
-  override lazy val jsonSerializerRegistry: JsonSerializerRegistry = WbooksSerializerRegistry
+  //Register the JSON serializer registry
+  override lazy val jsonSerializerRegistry = BookSerializerRegistry
 
-  // Initialize the sharding of the Aggregate. The following starts the aggregate Behavior under
-  // a given sharding entity typeKey.
-  clusterSharding.init(
-    Entity(WbooksState.typeKey)(
-      entityContext => WbooksBehavior.create(entityContext)
-    )
-  )
-
+  // Register the  persistent entity
+  persistentEntityRegistry.register(wire[BookEntity])
 }

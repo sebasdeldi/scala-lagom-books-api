@@ -4,6 +4,7 @@ import com.lightbend.lagom.scaladsl.server.LocalServiceLocator
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest
 import org.scalatest.{AsyncWordSpec, BeforeAndAfterAll, Matchers}
 import org.wbooks.wbooks.api._
+import org.wbooks.wbooks.impl.service.WbooksApplication
 
 class WbooksServiceSpec extends AsyncWordSpec with Matchers with BeforeAndAfterAll {
 
