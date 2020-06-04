@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 
 import akka.Done
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntity
+import org.wbooks.wbooks.api.Book
 
 class BookEntity extends PersistentEntity {
 
@@ -18,6 +19,10 @@ class BookEntity extends PersistentEntity {
       .onCommand[CreateBookCommand, Done] {
         case (CreateBookCommand(book), ctx, _) ⇒
           ctx.thenPersist(BookCreated(book))(_ ⇒ ctx.reply(Done))
+      }
+      .onReadOnlyCommand[GetBookCommand, Book] {
+        case (GetBookCommand(id), ctx, state) =>
+          ctx.reply(state.book.getOrElse(Book(id, "not found")))
       }
       .onEvent {
         case (BookCreated(book), _) ⇒

@@ -12,3 +12,9 @@ case class CreateBookCommand(book: Book) extends BookCommand[Done]
 object CreateBookCommand{
   implicit val format: Format[CreateBookCommand] = Json.format
 }
+
+case class GetBookCommand(id: String) extends BookCommand[Book]
+
+object GetBookCommand{
+  implicit val format: Format[GetBookCommand] = Json.format
+}

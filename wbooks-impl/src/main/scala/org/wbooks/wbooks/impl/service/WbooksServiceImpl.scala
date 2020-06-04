@@ -5,7 +5,7 @@ import akka.{Done, NotUsed}
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.persistence.{PersistentEntityRef, PersistentEntityRegistry}
 import org.wbooks.wbooks.api.{Book, WbooksService}
-import org.wbooks.wbooks.impl.eventsourcing.{BookCommand, BookEntity, CreateBookCommand}
+import org.wbooks.wbooks.impl.eventsourcing.{BookCommand, BookEntity, CreateBookCommand, GetBookCommand}
 
 import scala.concurrent.ExecutionContext
 
@@ -24,6 +24,13 @@ class WbooksServiceImpl(
       ref(book.id).ask(CreateBookCommand(book)).map {
         case Done => s"Book $title! has been created."
       }
+    }
+  }
+
+  override def getBook(id: String): ServiceCall[NotUsed, String] = {
+    ServiceCall { _ =>
+      ref(id).ask(GetBookCommand(id)).map(book =>
+        s"Book for id:$id is ${book.title}")
     }
   }
 
